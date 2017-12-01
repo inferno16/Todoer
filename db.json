@@ -1,37 +1,53 @@
 {
-    "tasks": [
-        {
-            "id": 1,
-            "code": "TS1",
-            "name": "Clean the thing",
-            "description": "Cleaning the thing is very important",
-            "completion": "For 10.10.2018",
-            "points": 5,
-            "status": 0,
-            "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-            "userId": null
-        },
-        {
-            "id": 2,
-            "code": "TS2",
-            "name": "Clean the thing 2",
-            "description": "Cleaning the thing 2 is very important",
-            "completion": "For 10.11.2018",
-            "points": 8,
-            "status": 0,
-            "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-            "userId": null
-        },
-        {
-            "id": 3,
-            "code": "TS3",
-            "name": "Clean the thing 3",
-            "description": "Cleaning the thing 3 is very important",
-            "completion": "For 10.11.2018",
-            "points": 3,
-            "status": 0,
-            "userPhoto": null,
-            "userId": null
-        }
-    ]
+  "tasks": [
+    {
+      "id": 1,
+      "code": "TS1",
+      "name": "Clean the thing 22",
+      "description": " Cleaning the thing 2 is very important",
+      "completion": "For 10.11.2018",
+      "points": 8,
+      "status": 0,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
+      "userId": null
+    },
+    {
+      "id": 2,
+      "code": "TS2",
+      "name": "Clean the thing 2",
+      "description": "Cleaning the thing 2 is very important",
+      "completion": "For 10.11.2018",
+      "points": 8,
+      "status": 0,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
+      "userId": null
+    },
+    {
+      "id": 3,
+      "code": "TS3",
+      "name": "Clean the thing 2",
+      "description": "Cleaning the thing 2 is very important",
+      "completion": "For 10.11.2018",
+      "points": 8,
+      "status": 0,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
+      "userId": null
+    },
+    {
+      "code": "TS10",
+      "name": "Scle",
+      "description": "Sleeepeeyy",
+      "completion": "For today",
+      "points": 8,
+      "id": 4
+    },
+    {
+      "code": "TS11",
+      "name": "Diee",
+      "description": "Doooe",
+      "completion": "For today",
+      "points": 15,
+      "id": 5
+    }
+  ]
 }

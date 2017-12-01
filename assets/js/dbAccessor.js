@@ -9,7 +9,38 @@ var dbAccessor = (function(){
         });
     }
 
+    function editTask(data) {
+         return $.ajax({
+            method: 'PATCH',
+            url: tasksUrl + `/${data.id}`,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json'
+        });
+    }
+
+    function removeTask(id) {
+         return $.ajax({
+            method: 'DELETE',
+            url: tasksUrl + `/${id}`,
+            contentType: 'application/json'
+        });
+    }
+
+    function addTask(data) {
+        return $.ajax({
+            method: 'POST',
+            url: tasksUrl,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json'
+        });
+    }
+
     return {
-        getTasks: getTasks
+        getTasks: getTasks,
+        editTask: editTask,
+        removeTask: removeTask,
+        addTask: addTask
     }
 })()
