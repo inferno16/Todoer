@@ -70,7 +70,7 @@
         </div>
         <div class="main-content col-sm-10 col-xs-12">
             <div class="cards-container col-xs-12 row">
-                <div class="card col-sm-3 col-xs-12">
+                <!-- <div class="card col-sm-3 col-xs-12">
                     <div class="card-heading">
                         <span class="card-heading-text">Clean</span>
                         <span class="card-heading-photo pull-right"><img src="https://png.icons8.com/account/ultraviolet/25/000000"></span>
@@ -78,10 +78,10 @@
                     <div class="card-body">
                         Clean it
                     </div>
-                </div>
+                </div> -->
 
                 
-                <div class="card col-sm-3 col-xs-12">
+                <!-- <div class="card col-sm-3 col-xs-12">
                     <div class="front">
                         <div class="card-heading">
                             <span class="card-heading-text">Task code</span>
@@ -99,12 +99,8 @@
                                     <img src="https://png.icons8.com/menu/ultraviolet/20/000000">
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li class="assign-btn dropdown-submenu"><a href="#">                                           
+                                    <li class="assign-btn"><a href="#">                                           
                                         <i class="fa fa-user-plus" aria-hidden="true"></i> Assign</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a>Some</a></li>
-                                            <li><a>Some</a></li>
-                                        </ul>
                                     </li>
                                     <li onclick="rotateCard(this)"><a href="#"><i class="fa fa-pencil-square-o"></i> Edit</a></li>
                                     <li class="delete-btn">
@@ -138,7 +134,7 @@
                         </div>         
                     </div>
                 </div>
-            </div>
+            </div> -->
 
                 <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -165,26 +161,100 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="assets/js/progressbar.min.js"></script>
+    <script src="assets/js/dbAccessor.js"></script>
     <script>
+        let cardId;
+        let tasks;
+        function buildTemplate(task) {
+        console.log(task);
+        let cardTemplate = `<div class="card col-sm-3 col-xs-12">
+                    <div class="front">
+                        <div class="card-heading">
+                            <span class="card-heading-text">${task.code}</span>
+                            <span class="card-heading-photo pull-right"><img src="${task.userPhoto}"></span>
+                        </div>
+                        <div class="card-body">
+                            <h4>${task.name}</h4>
+                            <p> ${task.description || 'None'}</p>                          
+                        </div>
+                        <div class="footer">
+                            <span class="label label-default">${task.completion}</span>
+                            <span class="badge">${task.points}</span>
+                            <div class="dropup">
+                                <button type="button" class="flip" id="dropdownMenu1" data-toggle="dropdown">
+                                    <img src="https://png.icons8.com/menu/ultraviolet/20/000000">
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li class="assign-btn"><a href="#">                                           
+                                        <i class="fa fa-user-plus" aria-hidden="true"></i> Assign</a>
+                                    </li>
+                                    <li onclick="rotateCard(this)"><a href="#"><i class="fa fa-pencil-square-o"></i> Edit</a></li>
+                                    <li class="delete-btn">
+                                        <a class="delete-btn" href="#" data-toggle="modal" data-target="#exampleModal">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>                  
+                    </div>
+                    <div class="back">
+                        <div class="card-heading">
+                            <span class="card-heading-text">${task.name}</span>
+                        </div>
+                        <div class="card-body">
+                           Back
+                        </div>
+                        <div class="footer">
+                            <div class="actions">
+                                <a class="btn delete-btn" href="#" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <a class="btn" href="#">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </a>
+                            </div>
+                            <button type="button" class="flip" onclick="rotateCard(this)">
+                                <img src="https://png.icons8.com/down-left/ultraviolet/20/000000"> Preview
+                            </button>
+                        </div>         
+                    </div>
+                </di>`;
+
+            return cardTemplate;
+        }
+        
+        
+        dbAccessor.getTasks().done(function(data) {
+            tasks = data;
+
+            for(task of tasks) {
+                let taskBody = buildTemplate(task);
+                $('.cards-container').append(taskBody);
+            }
+        })
+
+
         function rotateCard(btn){
             var $card = $(btn).closest('.card');
             $card.find('.front').toggle(500);
             $card.find('.back').toggle(500);
         }
-        let cardId;
+       
         $('.delete-btn').click(function() {
-            cardId = $(this).closest(".card").find('.card-heading-text').text();
+            cardId = $(this).closest(".card").find('.front .card-heading-text').text();
         });
 
         $('.confirm-delete').click(function() {
             $(".card").each(function() {
-                console.log($(this).find(".card-heading-text"));
-                if ($(this).find(".card-heading-text").first().text() == cardId) {
+                console.log($(this).find(".front .card-heading-text").first().text());
+                if ($(this).find(".front .card-heading-text").text() == cardId) {
                     $(this).remove();
                     $('#exampleModal').modal('hide')
                 }
             })
         });
+       
         // $(".dropdown-submenu").click(function() {
         //     $(this).closest('.dropdown-menu').toggle();
         // })
