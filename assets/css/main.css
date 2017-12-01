@@ -1,0 +1,114 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+html {
+    font-family :'"Raleway", Helvetica, sans-serif';
+}
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+#wrapper {
+    display: block;
+}
+
+.main-content-heading {
+    text-align: center;
+    color: lightslategray;
+}
+
+.custom-navbar {
+    background-color:#5090B2;
+    border-radius: 0;
+}
+
+.custom-navbar #navbar-collapse a {
+    color: whitesmoke;
+}
+
+#navbar-collapse li:hover {
+    background-color: lightslategray;
+}
+
+#navbar-collapse .additional-link {
+    display: none;
+}
+
+.side-bar {
+    background-color:#5090B2;
+    border-top: 1px solid gray;
+    margin-top: -20px;
+    min-height: 100vh;
+}
+
+.collapsable {
+    background-color:transparent;
+    color:white;
+}
+
+.sidebar-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 5px 10px;
+    color: white;
+    font-size: 14px;
+}
+.sidebar-item .item-text {
+    vertical-align: middle
+}
+
+.sidebar-item:hover {
+    background-color: lightslategray;
+}
+
+.main-content {
+    margin-top: -20px;
+    background-color: #f5f5f5;
+    height: 100vh;
+    padding-bottom: 30px;
+    overflow: auto;
+}
+
+.progress-heading {
+    text-align: center;
+    color: lightslategray;
+    padding: 10px 0;
+    font-size: 1.8rem;
+    line-height: 20px;
+    min-height: 60px;
+}
+
+.stats-row div {
+    margin-bottom: 30px;
+}
+
+.overview-section-heading {
+    border-bottom: 3px solid #5090B2;
+    color: lightslategray;
+    padding-bottom: 10px;
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 1000px) {
+    .item-text {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .side-bar {
+        display: none;
+    }
+
+    #navbar-collapse .additional-link {
+        display: block;
+    }
+
+    #navbar-collapse .additional-link:hover {
+        background-color: lightslategray;
+    }
+}

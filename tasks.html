@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todoer</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom styles  -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/tasks.css">
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default custom-navbar">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Todoer</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="additional-link">
+                            <a href="index.html">
+                                <img src="https://png.icons8.com/overview/ultraviolet/20/000000">
+                                <span class="item-text">Overview</span>
+                            </a>
+                        </li>
+                        <li class="additional-link">                
+                            <a href="tasks.html">
+                                <img src="https://png.icons8.com/menu/ultraviolet/20/000000">
+                                <span class="item-text">Tasks</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="side-bar col-sm-2 col-xs-1">
+            <a href="index.html">
+                <div class="sidebar-item">               
+                    <img src="https://png.icons8.com/overview/ultraviolet/20/000000">
+                    <span class="item-text">Overview</span>
+                </div>
+            </a>
+            <a href="tasks.html">
+                <div class="sidebar-item">
+                    <img src="https://png.icons8.com/tasks/ultraviolet/40/000000">
+                    <span class="item-text">Tasks</span>
+                </div>
+            </a>
+            <!-- <div class="sidebar-item">
+                <img src="https://png.icons8.com/add-property/ultraviolet/20/000000">
+                <span class="item-text">Add Task</span>
+            </div>
+            <div class="sidebar-item">
+                <img src="https://png.icons8.com/remove-property/ultraviolet/20/000000">
+                <span class="item-text">Remove Task</span>
+            </div> -->
+        </div>
+        <div class="main-content col-sm-10 col-xs-12">
+            <div class="cards-container col-xs-12 row">
+                <div class="card col-sm-3 col-xs-12">
+                    <div class="card-heading">
+                        <span class="card-heading-text">Clean</span>
+                        <span class="card-heading-photo pull-right"><img src="https://png.icons8.com/account/ultraviolet/25/000000"></span>
+                    </div>
+                    <div class="card-body">
+                        Clean it
+                    </div>
+                </div>
+
+                
+                <div class="card col-sm-3 col-xs-12">
+                    <div class="front">
+                        <div class="card-heading">
+                            <span class="card-heading-text">Task code</span>
+                            <span class="card-heading-photo pull-right"><img src="https://png.icons8.com/account/ultraviolet/25/000000"></span>
+                        </div>
+                        <div class="card-body">
+                            <h4>Task name for the current task</h4>
+                            <p> Description for the task</p>                          
+                        </div>
+                        <div class="footer">
+                            <span class="label label-default">For 28.01.2018</span>
+                            <span class="badge">5</span>
+                            <div class="dropup">
+                                <button type="button" class="flip" id="dropdownMenu1" data-toggle="dropdown">
+                                    <img src="https://png.icons8.com/menu/ultraviolet/20/000000">
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li class="assign-btn dropdown-submenu"><a href="#">                                           
+                                        <i class="fa fa-user-plus" aria-hidden="true"></i> Assign</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a>Some</a></li>
+                                            <li><a>Some</a></li>
+                                        </ul>
+                                    </li>
+                                    <li onclick="rotateCard(this)"><a href="#"><i class="fa fa-pencil-square-o"></i> Edit</a></li>
+                                    <li class="delete-btn">
+                                        <a class="delete-btn" href="#" data-toggle="modal" data-target="#exampleModal">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>                  
+                    </div>
+                    <div class="back">
+                        <div class="card-heading">
+                            <span class="card-heading-text">Task name</span>
+                        </div>
+                        <div class="card-body">
+                           Back
+                        </div>
+                        <div class="footer">
+                            <div class="actions">
+                                <a class="btn delete-btn" href="#" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <a class="btn" href="#">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </a>
+                            </div>
+                            <button type="button" class="flip" onclick="rotateCard(this)">
+                                <img src="https://png.icons8.com/down-left/ultraviolet/20/000000"> Preview
+                            </button>
+                        </div>         
+                    </div>
+                </div>
+            </div>
+
+                <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content no-border-radius">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Task name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this task?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger confirm-delete">Delete</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="assets/js/progressbar.min.js"></script>
+    <script>
+        function rotateCard(btn){
+            var $card = $(btn).closest('.card');
+            $card.find('.front').toggle(500);
+            $card.find('.back').toggle(500);
+        }
+        let cardId;
+        $('.delete-btn').click(function() {
+            cardId = $(this).closest(".card").find('.card-heading-text').text();
+        });
+
+        $('.confirm-delete').click(function() {
+            $(".card").each(function() {
+                console.log($(this).find(".card-heading-text"));
+                if ($(this).find(".card-heading-text").first().text() == cardId) {
+                    $(this).remove();
+                    $('#exampleModal').modal('hide')
+                }
+            })
+        });
+        // $(".dropdown-submenu").click(function() {
+        //     $(this).closest('.dropdown-menu').toggle();
+        // })
+    </script>
+</body>
+</html>
