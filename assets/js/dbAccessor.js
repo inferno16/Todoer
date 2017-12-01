@@ -1,6 +1,7 @@
 var dbAccessor = (function(){
     let serverUrl = ' http://localhost:3000';
     let tasksUrl = `${serverUrl}/tasks`;
+    let usersUrl = `${serverUrl}/users`;
 
     function getTasks() {
         return $.ajax({
@@ -37,10 +38,18 @@ var dbAccessor = (function(){
         });
     }
 
+    function getUsers() {
+         return $.ajax({
+            url: usersUrl,
+            contentType: 'application/json'
+        });
+    }
+
     return {
         getTasks: getTasks,
         editTask: editTask,
         removeTask: removeTask,
-        addTask: addTask
+        addTask: addTask,
+        getUsers: getUsers
     }
 })()

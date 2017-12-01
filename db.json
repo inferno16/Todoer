@@ -4,7 +4,7 @@
       "id": 1,
       "code": "TS1",
       "name": "Clean the thing 22",
-      "description": " Cleaning the thing 2 is very important",
+      "description": "  Cleaning the thing 2 is very important",
       "completion": "For 10.11.2018",
       "points": 8,
       "status": 0,
@@ -48,6 +48,20 @@
       "completion": "For today",
       "points": 15,
       "id": 5
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Dian",
+      "lastName": "Dimitrov",
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
+    },
+    {
+      "id": 2,
+      "firstName": "Ivan",
+      "lastName": "Angelov",
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
     }
   ]
 }
