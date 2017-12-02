@@ -13,7 +13,7 @@ var dbAccessor = (function(){
     function editTask(data) {
          return $.ajax({
             method: 'PATCH',
-            url: tasksUrl + `/${data.id}`,
+            url:  `${tasksUrl}/${data.id}`,
             contentType: 'application/json',
             data: JSON.stringify(data),
             dataType: 'json'
@@ -23,7 +23,7 @@ var dbAccessor = (function(){
     function removeTask(id) {
          return $.ajax({
             method: 'DELETE',
-            url: tasksUrl + `/${id}`,
+            url: `${tasksUrl}/${data.id}`,
             contentType: 'application/json'
         });
     }
@@ -55,12 +55,20 @@ var dbAccessor = (function(){
 		});
 	}
 
+    function getUser(id) {
+        return $.ajax({
+            url: `${usersUrl}/${id}`,
+            contentType: 'application/json'
+        });
+    }
+
     return {
         getTasks: getTasks,
         editTask: editTask,
         removeTask: removeTask,
         addTask: addTask,
         getUsers: getUsers,
+        getUser: getUser,
         addUser: addUser
     }
 })()

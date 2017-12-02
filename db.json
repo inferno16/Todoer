@@ -9,7 +9,7 @@
       "points": 8,
       "status": 0,
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-      "userId": null
+      "userId": 2
     },
     {
       "id": 2,
@@ -39,15 +39,19 @@
       "description": "Sleeepeeyy",
       "completion": "For today",
       "points": 8,
-      "id": 4
+      "id": 4,
+      "userId": 2,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
     },
     {
       "code": "TS11",
       "name": "Diee",
-      "description": "Doooe",
+      "description": " Doooe",
       "completion": "For today",
-      "points": 15,
-      "id": 5
+      "points": 8,
+      "id": 5,
+      "userId": 2,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
     }
   ],
   "users": [
