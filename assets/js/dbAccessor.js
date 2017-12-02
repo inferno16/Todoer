@@ -44,12 +44,23 @@ var dbAccessor = (function(){
             contentType: 'application/json'
         });
     }
+	
+	function addUser(data) {
+		return $.ajax({
+			method: 'POST',
+			url: usersUrl,
+			contentType: 'application/json',
+			data: JSON.stringify(data),
+			dataType: 'json'
+		});
+	}
 
     return {
         getTasks: getTasks,
         editTask: editTask,
         removeTask: removeTask,
         addTask: addTask,
-        getUsers: getUsers
+        getUsers: getUsers,
+        addUser: addUser
     }
 })()
