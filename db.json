@@ -62,6 +62,60 @@
       "firstName": "Ivan",
       "lastName": "Angelov",
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
+    },
+    {
+      "firstName": "Ivan",
+      "lastName": "Angelov",
+      "username": "ivan.angelov95",
+      "email": "ivan.angelov95@yahoo.com",
+      "password": "MTIzNDU2",
+      "phone": "",
+      "id": 3
+    },
+    {
+      "firstName": "Ivan",
+      "lastName": "Angelov",
+      "username": "inferno16",
+      "email": "inferno16@mail.bg",
+      "password": "MTIzNDU2",
+      "phone": "",
+      "id": 4
+    },
+    {
+      "firstName": "Ivan",
+      "lastName": "Angelov",
+      "username": "inferno116",
+      "email": "inferno16@mail.bg",
+      "password": "MTIzNDU2",
+      "phone": "",
+      "id": 5
+    },
+    {
+      "firstName": "Ivan",
+      "lastName": "Angelov",
+      "username": "inferno112",
+      "email": "inferno16@mail.bg",
+      "password": "MTIzNDU2",
+      "phone": "",
+      "id": 6
+    },
+    {
+      "firstName": "Ivan",
+      "lastName": "Angelov",
+      "username": "inf3rno16",
+      "email": "inferno16@mail.bg",
+      "password": "MTIzNDU2",
+      "phone": "",
+      "id": 7
+    },
+    {
+      "firstName": "Ivan",
+      "lastName": "Angelov",
+      "username": "61460111",
+      "email": "inferno16@mail.bg",
+      "password": "MTIzNDU2",
+      "phone": "",
+      "id": 8
     }
   ]
 }
