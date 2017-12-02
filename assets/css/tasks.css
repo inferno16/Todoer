@@ -200,3 +200,7 @@ select option:hover {
     background-image: none;
     border-radius: 0;
 }
+
+.add-task-form input, .add-task-form button, .add-task-form textarea {
+    border-radius: 0;
+}
