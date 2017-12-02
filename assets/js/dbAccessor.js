@@ -44,6 +44,16 @@ var dbAccessor = (function(){
             contentType: 'application/json'
         });
     }
+	
+	function addUser(data) {
+		return $.ajax({
+			method: 'POST',
+			url: usersUrl,
+			contentType: 'application/json',
+			data: JSON.stringify(data),
+			dataType: 'json'
+		});
+	}
 
     function getUser(id) {
         return $.ajax({
@@ -58,6 +68,7 @@ var dbAccessor = (function(){
         removeTask: removeTask,
         addTask: addTask,
         getUsers: getUsers,
-        getUser: getUser
+        getUser: getUser,
+        addUser: addUser
     }
 })()
