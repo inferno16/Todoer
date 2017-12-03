@@ -118,8 +118,17 @@ $('#login-form').submit(function(e){
 				DisplayError('password', 'Invalid password!');
 			}
 			else {
-				// Make magic
-				alert('OK');
+				if(typeof(Storage) === 'undefined') {
+					DisplayError('', 'It looks like your browser does not support sessionStorage. Please use a different browser.');
+				}
+				else {
+					$.each(users[id], function(key, value){
+						if(key != 'password') {
+							sessionStorage.setItem(key, value);
+						}
+					});
+					$(location).attr('href', 'index.html');
+				}
 			}
 		});
 	}

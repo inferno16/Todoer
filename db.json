@@ -75,6 +75,20 @@
   ],
   "users": [
     {
+      "id": 1,
+      "firstName": "Dian",
+      "lastName": "Dimitrov",
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
+    },
+    {
+      "id": 2,
+      "firstName": "Ivan",
+      "lastName": "Angelov",
+	  "username": "ivan.angelov95",
+	  "email": "ivan.angelov95@yahoo.com",
+	  "password": "MTIzNDU2",
+	  "phone": "",
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
       "firstName": "Ivan",
       "lastName": "Angelov",
       "username": "ivan.angelov95",

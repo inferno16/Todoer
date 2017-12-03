@@ -20,56 +20,7 @@
 
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default custom-navbar">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">Todoer</a>
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#">Link</a>
-                        </li>
-                        <li>
-                            <a href="#">Link</a>
-                        </li>
-                        <li class="additional-link">
-                            <a href="index.html">
-                                <img src="https://png.icons8.com/overview/ultraviolet/20/000000">
-                                <span class="item-text">Overview</span>
-                            </a>
-                        </li>
-                        <li class="additional-link">
-                            <a href="tasks.html">
-                                <img src="https://png.icons8.com/menu/ultraviolet/20/000000">
-                                <span class="item-text">Tasks</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="side-bar col-sm-2 col-xs-1">
-            <a href="index.html">
-                <div class="sidebar-item">
-                    <img src="https://png.icons8.com/overview/ultraviolet/20/000000">
-                    <span class="item-text">Overview</span>
-                </div>
-            </a>
-            <a href="tasks.html">
-                <div class="sidebar-item">
-                    <img src="https://png.icons8.com/tasks/ultraviolet/40/000000">
-                    <span class="item-text">Tasks</span>
-                </div>
-            </a>
-        </div>
+		<div id="nav-placeholder"></div>
         <div class="main-content col-sm-10 col-xs-12">
             <div class="filters-container col-xs-12 row">
 
@@ -216,6 +167,8 @@
     <script src="assets/js/dbAccessor.js"></script>
     <script src="assets/js/bootstrap-slider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
+	
+	<script src="assets/js/navigation.js"></script>
     <script>
         function rotateCard(btn) {
             var $card = $(btn).closest('.card');

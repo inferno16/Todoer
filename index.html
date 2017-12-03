@@ -13,53 +13,8 @@
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default custom-navbar">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">Todoer</a>
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li class="additional-link">
-                            <a href="index.html">
-                                <img src="https://png.icons8.com/overview/ultraviolet/20/000000">
-                                <span class="item-text">Overview</span>
-                            </a>
-                        </li>
-                        <li class="additional-link">
-                            <a href="tasks.html">
-                                <img src="https://png.icons8.com/menu/ultraviolet/20/000000">
-                                <span class="item-text">Tasks</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="side-bar col-sm-2 col-xs-1">
-            <a href="index.html">
-                <div class="sidebar-item">
-                    <img src="https://png.icons8.com/overview/ultraviolet/25/000000">
-                    <span class="item-text">Overview</span>
-                </div>
-            </a>
-            <a href="tasks.html">
-                <div class="sidebar-item">
-                    <img src="https://png.icons8.com/tasks/ultraviolet/25/000000">
-                    <span class="item-text">Tasks</span>
-                </div>
-            </a>
-        </div>
-        <div class="main-content col-sm-10 col-xs-12">
+        <div id="nav-placeholder"></div>
+		<div class="main-content col-sm-10 col-xs-12">
             <h1 class="main-content-heading">Overview</h1>
             <div class="row stats-row col-xs-12 col-sm-10 col-sm-offset-1">
                 <h2 class="overview-section-heading">Tasks for this spirnt</h2>
@@ -99,5 +54,6 @@
 
     <!-- Custom JS  -->
     <script src="assets/js/index.js"></script>
+    <script src="assets/js/navigation.js"></script>
 </body>
 </html>
