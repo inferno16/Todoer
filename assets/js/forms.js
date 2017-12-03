@@ -87,6 +87,8 @@ $('#registration-form').submit(function(e){
 				data['password'] = Base64.encode(data['password']);
 				dbAccessor.addUser(data);
 			}
+
+			location.href = 'login.html';
 		});
 	}
 	else { DisplayError('', 'Please fill all requered fields!'); }

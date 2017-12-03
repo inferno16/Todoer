@@ -14,13 +14,14 @@
     <link rel="stylesheet" href="assets/css/ribbon.css">
     <link rel="stylesheet" href="assets/css/bootstrap-slider.min.css">
     <link rel="stylesheet" href="assets/css/tasks.css">
+    <link rel="stylesheet" href="assets/css/toastr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap2.min.css"
     />
 </head>
 
 <body>
     <div id="wrapper">
-		<div id="nav-placeholder"></div>
+        <div id="nav-placeholder"></div>
         <div class="main-content col-sm-10 col-xs-12">
             <div class="filters-container col-xs-12 row">
 
@@ -166,9 +167,10 @@
     <script src="assets/js/progressbar.min.js"></script>
     <script src="assets/js/dbAccessor.js"></script>
     <script src="assets/js/bootstrap-slider.min.js"></script>
+    <script src="assets/js/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
-	
-	<script src="assets/js/navigation.js"></script>
+
+    <script src="assets/js/navigation.js"></script>
     <script>
         function rotateCard(btn) {
             var $card = $(btn).closest('.card');
@@ -253,7 +255,7 @@
                                 <div class="actions row">
                                     <div class="col-xs-6">
                                         <input type="text" class="form-control task-completion" value="${task.completion}">
-                                        <input type="number" class="form-control task-points" class="form-control" value="${task.points}">
+                                        <input type="number" class="form-control task-points" class="form-control" min="1" max="21" value="${task.points}">
                                     </div>
                                     <div class="col-xs-6">
                                         <a class="btn edit-btn">
@@ -306,6 +308,7 @@
                 dbAccessor.changeTaskStatus(data).done(function () {
                     loadTasks();
                     $('#reset-filters').trigger('click');
+                    toastr.success('Task status changed successfully!');
                 });
             })
 
@@ -318,8 +321,9 @@
                             isDeleted: true
                         };
                         dbAccessor.removeTask(data).done(function () {
-                            $self.remove();
+                            $self.remove();                          
                             $('#exampleModal').modal('hide');
+                            toastr.success('Task successfully removed!')
                         });
                     }
                 })
@@ -335,6 +339,11 @@
                 let completion = cardBack.find('.task-completion').first().val();
                 let points = parseInt(cardBack.find('.task-points').first().val());
 
+                if (points < 1 || points > 21) {
+                    toastr.error('Points should be between 1 and 21', 'Points not in range!')
+                    return;
+                }
+
                 const data = {
                     id: cardId,
                     code: taskCode,
@@ -348,6 +357,7 @@
                     $('.cards-container').html(' ');
                     $('#reset-filters').trigger('click');
                     loadTasks();
+                    toastr.success('Task successfully edited!');
                 })
             });
 
@@ -382,6 +392,7 @@
                     $('#reset-filters').trigger('click');
                     $('.add-task-form').toggle(100);
                     $('.add-task-form').find('input[type="text"], input[type="number"], textarea').val('');
+                    toastr.success('Task successfully added!');
                 });
             });
 
@@ -420,6 +431,7 @@
                         loadTasks();
                         $('#reset-filters').trigger('click');
                         $('#assignModal').modal('hide');
+                        toastr.success('Task successfully assigned!');
                     });
                 });
             });

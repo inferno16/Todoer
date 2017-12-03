@@ -8,10 +8,10 @@ $(document).ready(function(){
 				
 			$('a[href="register.html"]')
 				.text('Logout')
-				.attr('href', '#')
+				.attr('href', 'login.html')
 				.click(function(){
 					sessionStorage.clear();
-					$(location).attr('href', 'index.html');
+					$(location).attr('href', 'login.html');
 				});
 		}
 	});

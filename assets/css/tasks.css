@@ -231,3 +231,13 @@ form .slider.slider-horizontal {
 .slider-selection {
     background: gray;
 }
+
+#toast-container > div.toast-error {
+    background-color: gray;
+    color:white;
+}
+
+#toast-container > div.toast-success {
+    background-color:#1A6CA3;
+    color: white;
+}
