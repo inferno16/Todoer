@@ -1,29 +1,30 @@
-var dbAccessor = (function(){
+var dbAccessor = (function () {
     let serverUrl = ' http://localhost:3000';
     let tasksUrl = `${serverUrl}/tasks`;
     let usersUrl = `${serverUrl}/users`;
 
     function getTasks() {
         return $.ajax({
-            url: tasksUrl,
+            url: `${tasksUrl}?isDeleted=false`,
             contentType: 'application/json'
         });
     }
 
     function editTask(data) {
-         return $.ajax({
+        return $.ajax({
             method: 'PATCH',
-            url:  `${tasksUrl}/${data.id}`,
+            url: `${tasksUrl}/${data.id}`,
             contentType: 'application/json',
             data: JSON.stringify(data),
             dataType: 'json'
         });
     }
 
-    function removeTask(id) {
-         return $.ajax({
-            method: 'DELETE',
+    function removeTask(data) {
+        return $.ajax({
+            method: 'PATCH',
             url: `${tasksUrl}/${data.id}`,
+            data: JSON.stringify(data),
             contentType: 'application/json'
         });
     }
@@ -38,22 +39,31 @@ var dbAccessor = (function(){
         });
     }
 
+    function changeTaskStatus(data) {
+        return $.ajax({
+            method: 'PATCH',
+            url: `${tasksUrl}/${data.id}`,
+            data: JSON.stringify(data),
+            contentType: 'application/json'
+        });
+    }
+
     function getUsers() {
-         return $.ajax({
+        return $.ajax({
             url: usersUrl,
             contentType: 'application/json'
         });
     }
-	
-	function addUser(data) {
-		return $.ajax({
-			method: 'POST',
-			url: usersUrl,
-			contentType: 'application/json',
-			data: JSON.stringify(data),
-			dataType: 'json'
-		});
-	}
+
+    function addUser(data) {
+        return $.ajax({
+            method: 'POST',
+            url: usersUrl,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json'
+        });
+    }
 
     function getUser(id) {
         return $.ajax({
@@ -66,6 +76,7 @@ var dbAccessor = (function(){
         getTasks: getTasks,
         editTask: editTask,
         removeTask: removeTask,
+        changeTaskStatus: changeTaskStatus,
         addTask: addTask,
         getUsers: getUsers,
         getUser: getUser,

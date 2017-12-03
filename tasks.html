@@ -7,11 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Todoer</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <!-- Custom styles  -->
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/ribbon.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-slider.min.css">
     <link rel="stylesheet" href="assets/css/tasks.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap2.min.css"
     />
@@ -22,12 +23,19 @@
 		<div id="nav-placeholder"></div>
         <div class="main-content col-sm-10 col-xs-12">
             <div class="filters-container col-xs-12 row">
+
             </div>
-            <div class="add-task-form-wrapper col-xs-12">
+            <div class="tabs-wrapper col-xs-12">
                 <a href="#">
-                    <div class="add-task-filter col-sm-2 col-xs-6">
+                    <div class="add-task-filter col-sm-3 col-xs-6">
                         <img src="https://png.icons8.com/add-property/ultraviolet/40/000000">
                         <span class="item-text">Add Task</span>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="additional-filters col-sm-3 col-xs-6">
+                        <img src="https://png.icons8.com/search-property/ultraviolet/40/000000">
+                        <span class="item-text">Filters</span>
                     </div>
                 </a>
                 <form class="add-task-form col-sm-11 col-xs-12">
@@ -49,12 +57,42 @@
                     </div>
                     <div class="form-group">
                         <label for="points">Points</label>
-                        <input type="number" class="form-control" id="points" name="points" placeholder="Points">
+                        <span class="points-label">1</span>
+                        <input type="text" name="points" data-provide="slider" data-slider-ticks="1" data-slider-ticks-labels='"medium"' data-slider-min="1"
+                            data-slider-max="21" data-slider-step="1" class="form-control" id="points">
+                        <span class="points-label">21</span>
+                        <!-- <input type="number" class="form-control" id="points" name="points" placeholder="Points"> -->
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn gray-input">Add task</button>
+                </form>
+                <form class="filters-form col-sm-11 col-xs-12">
+                    <div class="form-group">
+                        <label for="code">Code or name</label>
+                        <input type="text" class="form-control" id="code-filter" name=">Code or name" placeholder="Code or name">
+                    </div>
+                    <div class="form-group">
+                        <label for="points">Points</label>
+                        <span class="points-label">1</span>
+                        <input type="text" name="points" data-provide="slider" data-slider-ticks="1" data-slider-ticks-labels='"medium"' data-slider-min="1"
+                            data-slider-max="21" data-slider-step="1" data-slider-value="[1,21]" class="form-control" id="points-filter"
+                            placeholder="Points">
+                        <span class="points-label">21</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="status-filter">Status</label>
+                        <select class="form-control" id="status-filter" name="status" placeholder="Status">
+                            <option value="-1">All</option>
+                            <option value="1">Not started</option>
+                            <option value="2">Not completed</option>
+                            <option value="3">Completed</option>
+                        </select>
+                    </div>
+                    <button class="pull-right gray-input" id="reset-filters" type="reset">
+                        <img src="https://png.icons8.com/delete-document/ultraviolet/30/000000"> Clear filters
+                    </button>
                 </form>
             </div>
-            
+
             <div class="cards-container col-xs-12 row"></div>
 
             <!-- Modal -->
@@ -124,28 +162,44 @@
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/progressbar.min.js"></script>
     <script src="assets/js/dbAccessor.js"></script>
+    <script src="assets/js/bootstrap-slider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
 	
 	<script src="assets/js/navigation.js"></script>
     <script>
         function rotateCard(btn) {
             var $card = $(btn).closest('.card');
-            $card.find('.front').toggle(500);
-            $card.find('.back').toggle(500);
+            $card.find('.front').toggle();
+            $card.find('.back').toggle();
         }
         $(function () {
             let cardId;
             let tasks;
+            let filteredTasks = [];
+            let taskFilter = {};
             let modalTaskId;
+            const statusToValueMap = {
+                0: "Not started",
+                1: "Not completed",
+                2: "Completed"
+            };
+
+            const valueToStatusToMap = {
+                "Not started": 0,
+                "Not completed": 1,
+                "Completed": 2
+            }
 
             function buildTemplate(task) {
                 let cardTemplate =
                     `<div class="card col-md-4 col-xs-12">
                         <div class="front">
+                                <div class="ribbon-wrapper">
+                                    <div class="ribbon">${statusToValueMap[task.status]}</div>
+                                </div>
                             <div class="card-heading">
                                 <span class="card-heading-text">${task.code}</span>
                                 <span class="card-heading-photo pull-right"><img src="${task.userPhoto}"></span>
@@ -165,6 +219,13 @@
                                             <img src="https://png.icons8.com/menu/ultraviolet/20/000000">
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle">Change status</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#">Not started</a></li>
+                                                    <li><a href="#">Not completed</a></li>
+                                                    <li><a href="#">Completed</a></li>
+                                                </ul>
+                                            </li>
                                             <li class="assign-btn"><a href="#" data-toggle="modal" data-target="#assignModal">
                                                 <i class="fa fa-user-plus" aria-hidden="true"></i> Assign</a>
                                             </li>
@@ -212,8 +273,8 @@
 
             function loadTasks() {
                 dbAccessor.getTasks().done(function (data) {
-                    tasks = data;
-
+                    filteredTasks = tasks = data;
+                    $('.cards-container').html(' ');
                     for (task of tasks) {
                         let taskBody = buildTemplate(task);
                         $('.cards-container').append(taskBody);
@@ -229,12 +290,37 @@
                 $('.modal .modal-title').first().text(modalTitle);
             });
 
+            $(document).on('click', '.dropdown-toggle', function (event) {
+                event.stopPropagation();
+                $(this).parent().toggleClass('open');
+            });
+
+            $(document).on('click', '.dropdown-submenu .dropdown-menu li', function () {
+                let statusCode = valueToStatusToMap[$(this).text()];
+                let changeStatusTaskId = parseInt($(this).closest(".card").find('.task-id').first().val());
+                const data = {
+                    id: changeStatusTaskId,
+                    status: statusCode
+                };
+
+                dbAccessor.changeTaskStatus(data).done(function () {
+                    loadTasks();
+                    $('#reset-filters').trigger('click');
+                });
+            })
+
             $('.confirm-delete').click(function () {
                 $(".card").each(function () {
                     if ($(this).find(".task-id").first().val() == cardId) {
-                        dbAccessor.removeTask(parseInt(cardId));
-                        $(this).remove();
-                        $('#exampleModal').modal('hide');
+                        let $self = $(this);
+                        const data = {
+                            id: parseInt(cardId),
+                            isDeleted: true
+                        };
+                        dbAccessor.removeTask(data).done(function () {
+                            $self.remove();
+                            $('#exampleModal').modal('hide');
+                        });
                     }
                 })
             });
@@ -260,12 +346,24 @@
 
                 dbAccessor.editTask(data).done(function () {
                     $('.cards-container').html(' ');
+                    $('#reset-filters').trigger('click');
                     loadTasks();
                 })
             });
 
             $('.add-task-filter').on('click', function () {
-                $('.add-task-form').toggle(100);
+                $('.additional-filters').removeClass('active');
+                $('.filters-form').removeClass('active').hide();
+                $(this).toggleClass('active');
+                $('.add-task-form').toggleClass('active').toggle(100);
+            });
+
+
+            $('.additional-filters').click(function () {
+                $('.add-task-filter').removeClass('active');
+                $('.add-task-form').hide();
+                $(this).toggleClass('active');
+                $('.filters-form').toggle(100);
             });
 
             $('.add-task-form').submit(function (e) {
@@ -274,11 +372,14 @@
                     obj[item.name] = item.value;
                     return obj;
                 }, {});
-                data.points = parseInt(data.points);
-                console.log(data);
+                data.points = $('#points').slider().data('slider').getValue();
+                data.status = 0;
+                data.userPhoto = data.userId = null;
+                data.isDeleted = false;
                 dbAccessor.addTask(data).done(function () {
                     $('.cards-container').html(' ');
                     loadTasks();
+                    $('#reset-filters').trigger('click');
                     $('.add-task-form').toggle(100);
                     $('.add-task-form').find('input[type="text"], input[type="number"], textarea').val('');
                 });
@@ -317,10 +418,53 @@
                     dbAccessor.editTask(editData).done(function () {
                         $('.cards-container').html(' ');
                         loadTasks();
+                        $('#reset-filters').trigger('click');
                         $('#assignModal').modal('hide');
                     });
-                })
+                });
             });
+
+            $('#code-filter').on('input', function () {
+                taskFilter.code = $(this).val().toLowerCase();
+                applyFilters();
+            });
+
+            $('#points-filter').slider().on('slideStop', function () {
+                taskFilter.points = $(this).data('slider').getValue();
+                applyFilters();
+            });
+
+            $('#status-filter').on('input', function () {
+                taskFilter.status = parseInt($(this).val());
+                applyFilters();
+            });
+
+            function applyFilters() {
+                let points = taskFilter.points || [1, 21];
+                let taskCode = taskFilter.code || '';
+                let taskStatus = taskFilter.status || -1;
+                filteredTasks = tasks.filter(t =>
+                    (t.points >= points[0] && t.points <= points[1]) &&
+                    (t.code.toLowerCase().includes(taskCode) || t.name.toLowerCase().includes(taskCode)));
+                if (taskStatus !== -1) {
+                    filteredTasks = filteredTasks.filter(t => t.status === (taskStatus - 1));
+                }
+
+
+                $('.cards-container').html(' ');
+                for (task of filteredTasks) {
+                    let taskBody = buildTemplate(task);
+                    $('.cards-container').append(taskBody);
+                }
+            }
+
+            function resetFilters() {
+                $('#points-filter').slider().data('slider').setValue([1, 21]);
+                taskFilter = {};
+                applyFilters();
+            }
+
+            $('#reset-filters').click(resetFilters);
             // $(".dropdown-submenu").click(function() {
             //     $(this).closest('.dropdown-menu').toggle();
             // })
