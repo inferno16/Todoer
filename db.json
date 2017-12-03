@@ -4,12 +4,13 @@
       "id": 1,
       "code": "TS1",
       "name": "Clean the thing 22",
-      "description": "  Cleaning the thing 2 is very important",
+      "description": "   Cleaning the thing 2 is very important too",
       "completion": "For 10.11.2018",
       "points": 8,
-      "status": 0,
+      "status": 2,
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-      "userId": 2
+      "userId": 3,
+      "isDeleted": false
     },
     {
       "id": 2,
@@ -20,7 +21,8 @@
       "points": 8,
       "status": 0,
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-      "userId": null
+      "userId": null,
+      "isDeleted": false
     },
     {
       "id": 3,
@@ -31,42 +33,47 @@
       "points": 8,
       "status": 0,
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-      "userId": null
+      "userId": null,
+      "isDeleted": false
     },
     {
-      "code": "TS10",
-      "name": "Scle",
-      "description": "Sleeepeeyy",
-      "completion": "For today",
-      "points": 8,
       "id": 4,
-      "userId": 2,
-      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
+      "code": "Some",
+      "name": "Shi",
+      "description": "T",
+      "completion": "For today",
+      "points": 10,
+      "status": 0,
+      "userPhoto": null,
+      "userId": null,
+      "isDeleted": true
     },
     {
-      "code": "TS11",
-      "name": "Diee",
-      "description": " Doooe",
-      "completion": "For today",
-      "points": 8,
-      "id": 5,
-      "userId": 2,
-      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
+      "code": "TS12",
+      "name": "Doo",
+      "description": " Bee doo doo",
+      "completion": "Doo",
+      "points": 15,
+      "status": 0,
+      "userId": 3,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
+      "isDeleted": true,
+      "id": 5
+    },
+    {
+      "code": "22",
+      "name": "A",
+      "description": " A",
+      "completion": "A",
+      "points": 14,
+      "status": 0,
+      "userId": null,
+      "userPhoto": null,
+      "isDeleted": false,
+      "id": 6
     }
   ],
   "users": [
-    {
-      "id": 1,
-      "firstName": "Dian",
-      "lastName": "Dimitrov",
-      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
-    },
-    {
-      "id": 2,
-      "firstName": "Ivan",
-      "lastName": "Angelov",
-      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
-    },
     {
       "firstName": "Ivan",
       "lastName": "Angelov",
@@ -74,7 +81,8 @@
       "email": "ivan.angelov95@yahoo.com",
       "password": "MTIzNDU2",
       "phone": "",
-      "id": 3
+      "id": 3,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
     },
     {
       "firstName": "Ivan",
