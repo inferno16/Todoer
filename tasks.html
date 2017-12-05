@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/ribbon.css">
     <link rel="stylesheet" href="assets/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="assets/css/ball-clip-rotate-multiple.min.css">
     <link rel="stylesheet" href="assets/css/tasks.css">
     <link rel="stylesheet" href="assets/css/toastr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap2.min.css"
@@ -321,7 +322,7 @@
                             isDeleted: true
                         };
                         dbAccessor.removeTask(data).done(function () {
-                            $self.remove();                          
+                            $self.remove();
                             $('#exampleModal').modal('hide');
                             toastr.success('Task successfully removed!')
                         });
@@ -436,10 +437,10 @@
                 });
             });
 
-            $('#code-filter').on('input', function () {
+            $('#code-filter').on('input', debounce(function () {
                 taskFilter.code = $(this).val().toLowerCase();
                 applyFilters();
-            });
+            }, 200));
 
             $('#points-filter').slider().on('slideStop', function () {
                 taskFilter.points = $(this).data('slider').getValue();
@@ -455,6 +456,10 @@
                 let points = taskFilter.points || [1, 21];
                 let taskCode = taskFilter.code || '';
                 let taskStatus = taskFilter.status || -1;
+                let loader = `<div style="color: #64d6e2" class="la-ball-clip-rotate-multiple la-3x loader">
+                    <div></div>
+                    <div></div>
+                </div>`;
                 filteredTasks = tasks.filter(t =>
                     (t.points >= points[0] && t.points <= points[1]) &&
                     (t.code.toLowerCase().includes(taskCode) || t.name.toLowerCase().includes(taskCode)));
@@ -462,12 +467,25 @@
                     filteredTasks = filteredTasks.filter(t => t.status === (taskStatus - 1));
                 }
 
+                $('.cards-container').html(loader);
+                $('#code-filter').attr('disabled','true');
+                $('#points-filter').slider('disable');
+                $('#status-filter').attr('disabled','true');
+                $('#reset-filters').attr('disabled','true');
 
-                $('.cards-container').html(' ');
-                for (task of filteredTasks) {
-                    let taskBody = buildTemplate(task);
-                    $('.cards-container').append(taskBody);
-                }
+                setTimeout(function name(params) {
+                    $('.cards-container').html(' ');
+
+                    for (task of filteredTasks) {
+                        let taskBody = buildTemplate(task);
+                        $('.cards-container').append(taskBody);
+                    }
+
+                    $('#code-filter').removeAttr('disabled');
+                    $('#points-filter').slider('enable');
+                    $('#status-filter').removeAttr('disabled');
+                    $('#reset-filters').removeAttr('disabled');
+                }, 2000);
             }
 
             function resetFilters() {
@@ -475,6 +493,21 @@
                 taskFilter = {};
                 applyFilters();
             }
+
+            function debounce(func, wait, immediate) {
+                var timeout;
+                return function () {
+                    var context = this, args = arguments;
+                    var later = function () {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                    };
+                    var callNow = immediate && !timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                    if (callNow) func.apply(context, args);
+                };
+            };
 
             $('#reset-filters').click(resetFilters);
             // $(".dropdown-submenu").click(function() {
