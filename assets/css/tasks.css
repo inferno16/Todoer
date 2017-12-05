@@ -241,3 +241,8 @@ form .slider.slider-horizontal {
     background-color:#1A6CA3;
     color: white;
 }
+
+.cards-container .loader {
+   margin-left: 38%;
+   margin-top: 50px;
+}
