@@ -4,135 +4,126 @@ var defaultColor;
 var hoverColor = "#5090B2";
 
 function GetHexColor(color) {
-	if(color.indexOf('#') != -1) return color;
+    if(color.indexOf('#') != -1) return color;
 
-	color = color
-				.replace("rgba", "")
-				.replace("rgb", "")
-				.replace("(", "")
-				.replace(")", "");
-	color = color.split(",");
+    color = color
+                .replace("rgba", "")
+                .replace("rgb", "")
+                .replace("(", "")
+                .replace(")", "");
+    color = color.split(",");
 
-	return  "#"
-			+ ('0' + parseInt(color[0], 10).toString(16)).slice(-2)
-			+ ('0' + parseInt(color[1], 10).toString(16)).slice(-2)
-			+ ('0' + parseInt(color[2], 10).toString(16)).slice(-2);
+    return  "#"
+            + ('0' + parseInt(color[0], 10).toString(16)).slice(-2)
+            + ('0' + parseInt(color[1], 10).toString(16)).slice(-2)
+            + ('0' + parseInt(color[2], 10).toString(16)).slice(-2);
 }
 
 $(document).ready(function() {
-	$(".inputWithIcon input")
-		.focus(function() {
-			var icon = $(this).siblings("i");
-			var currentColor = GetHexColor($(icon).css("color"))
-			if(currentColor != hoverColor) {
-				defaultColor = currentColor;
-				$(icon).css("color", hoverColor);
-			}
-		})
-		.focusout(function() {
-			var icon = $(this).siblings("i");
-			$(icon).css("color", defaultColor);
-		});
+    $(".inputWithIcon input")
+        .focus(function() {
+            var icon = $(this).siblings("i");
+            var currentColor = GetHexColor($(icon).css("color"))
+            if(currentColor != hoverColor) {
+                defaultColor = currentColor;
+                $(icon).css("color", hoverColor);
+            }
+        })
+        .focusout(function() {
+            var icon = $(this).siblings("i");
+            $(icon).css("color", defaultColor);
+        });
 });
 
-function UserExists(user, users) {
-	var id = 0;
-	$.each(users, function(index, value){
-		if(users[index]['username'] === user){
-			id = index;
-			return false;
-		}
-	});
-	return id;
-}
-
 function DisplayError(field, error) {
-	if($.isArray(field)) {
-		$.each(field, function(index, value){$("[name='"+value+"']").siblings("i").css('color', 'red');});
-	}
-	else if(field != ''){
-		$("[name='"+field+"']").siblings("i").css('color', 'red');
-	}
-	$('#error').text(error);
+    if($.isArray(field)) {
+        $.each(field, function(index, value){$("[name='"+value+"']").siblings("i").css('color', 'red');});
+    }
+    else if(field != ''){
+        $("[name='"+field+"']").siblings("i").css('color', 'red');
+    }
+    $('#error').text(error);
 }
 
 $('#registration-form').submit(function(e){
-	e.preventDefault();
-	var data = $('#registration-form').serializeArray().reduce(function(obj, item){
-		obj[item.name] = item.value;
-		return obj;
-	}, {});
-	$.each(data, function(index, value){ $("[name='"+index+"']").siblings("i").css('color', ''); });
-	$('#error').text('');
-	var error = false;
-	$.each(data, function(index, value){
-		if(index != 'phone' && value.match(/^\s*$/)) {
-			$("[name='"+index+"']").siblings("i").css('color', 'red');
-			error = true;
-		}
-	});
-	if(!error) {
-		dbAccessor.getUsers().done(function(users) {
-			if(data['password'] != data['password2']) {
-				DisplayError(['password','password2'], 'Passwords does not match!');
-			}
-			else if(data['password'].length < 6) {
-				DisplayError(['password','password2'], 'Password must be at least 6 symbols!');
-			}
-			else if(UserExists(data['username'], users)) {
-				DisplayError('username', 'Username already exists!');
-			}
-			else {
-				delete data['password2'];
-				data['password'] = Base64.encode(data['password']);
-				dbAccessor.addUser(data);
-			}
-
-			location.href = 'login.html';
-		});
-	}
-	else { DisplayError('', 'Please fill all requered fields!'); }
+    e.preventDefault();
+    var data = $('#registration-form').serializeArray().reduce(function(obj, item){
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    $.each(data, function(index, value){ $("[name='"+index+"']").siblings("i").css('color', ''); });
+    $('#error').text('');
+    var error = false;
+    $.each(data, function(index, value){
+        if(index != 'phone' && value.match(/^\s*$/)) {
+            $("[name='"+index+"']").siblings("i").css('color', 'red');
+            error = true;
+        }
+    });
+    if(!error) {
+        if(data['password'] != data['password2']) {
+            DisplayError(['password','password2'], 'Passwords does not match!');
+        }
+        else if(data['password'].length < 6) {
+            DisplayError(['password','password2'], 'Password must be at least 6 symbols!');
+        }
+        else {
+            dbAccessor.getUserByUsername(data['username']).done(function(user){
+                user = user[0];
+                if(user != undefined) {
+                    DisplayError('username', 'Username already exists!');
+                }
+                else {
+                    delete data['password2'];
+                    data['password'] = Base64.encode(data['password']);
+                    data['userPhoto'] = "https://png.icons8.com/account/ultraviolet/25/000000";
+                    dbAccessor.addUser(data);
+                    location.href = 'login.html';
+                }
+            });
+        }
+    }
+    else { DisplayError('', 'Please fill all requered fields!'); }
 });
 
 $('#login-form').submit(function(e){
-	e.preventDefault();
-	var data = $('#login-form').serializeArray().reduce(function(obj, item){
-		obj[item.name] = item.value;
-		return obj;
-	}, {});
-	$.each(data, function(index, value){ $("[name='"+index+"']").siblings("i").css('color', ''); });
-	$('#error').text('');
-	var error = false;
-	$.each(data, function(index, value){
-		if(value.match(/^\s*$/)) {
-			$("[name='"+index+"']").siblings("i").css('color', 'red');
-			error = true;
-		}
-	});
-	if(!error) {
-		dbAccessor.getUsers().done(function(users) {
-			id = UserExists(data['username'], users);
-			console.log(id);
-			if(!id) {
-				DisplayError('username', 'Username not found!');
-			}
-			else if(users[id]['password'] != Base64.encode(data['password'])) {
-				DisplayError('password', 'Invalid password!');
-			}
-			else {
-				if(typeof(Storage) === 'undefined') {
-					DisplayError('', 'It looks like your browser does not support sessionStorage. Please use a different browser.');
-				}
-				else {
-					$.each(users[id], function(key, value){
-						if(key != 'password') {
-							sessionStorage.setItem(key, value);
-						}
-					});
-					$(location).attr('href', 'index.html');
-				}
-			}
-		});
-	}
-	else { DisplayError('', 'Please fill all fields!'); }
+    e.preventDefault();
+    var data = $('#login-form').serializeArray().reduce(function(obj, item){
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    $.each(data, function(index, value){ $("[name='"+index+"']").siblings("i").css('color', ''); });
+    $('#error').text('');
+    var error = false;
+    $.each(data, function(index, value){
+        if(value.match(/^\s*$/)) {
+            $("[name='"+index+"']").siblings("i").css('color', 'red');
+            error = true;
+        }
+    });
+    if(!error) {
+        dbAccessor.getUserByUsername(data['username']).done(function(user) {
+            user = user[0];
+            if(user === undefined) {
+                DisplayError('username', 'Username not found!');
+            }
+            else if(user.password != Base64.encode(data['password'])) {
+                DisplayError('password', 'Invalid password!');
+            }
+            else {
+                if(typeof(Storage) === 'undefined') {
+                    DisplayError('', 'It looks like your browser does not support sessionStorage. Please use a different browser.');
+                }
+                else {
+                    $.each(user, function(key, value){
+                        if(key != 'password') {
+                            sessionStorage.setItem(key, value);
+                        }
+                    });
+                    $(location).attr('href', 'index.html');
+                }
+            }
+        });
+    }
+    else { DisplayError('', 'Please fill all fields!'); }
 });

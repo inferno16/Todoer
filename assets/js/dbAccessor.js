@@ -72,6 +72,13 @@ var dbAccessor = (function () {
         });
     }
 
+    function getUserByUsername(username) {
+        return $.ajax({
+            url: `${usersUrl}?username=${username}`,
+            contentType: 'application/json'
+        });
+    }
+
     return {
         getTasks: getTasks,
         editTask: editTask,
@@ -80,6 +87,7 @@ var dbAccessor = (function () {
         addTask: addTask,
         getUsers: getUsers,
         getUser: getUser,
-        addUser: addUser
+        addUser: addUser,
+        getUserByUsername: getUserByUsername
     }
 })()

@@ -368,7 +368,6 @@
                 $('.add-task-form').toggleClass('active').toggle(100);
             });
 
-
             $('.additional-filters').click(function () {
                 $('.add-task-filter').removeClass('active');
                 $('.add-task-form').hide();
@@ -461,7 +460,6 @@
                 if (taskStatus !== -1) {
                     filteredTasks = filteredTasks.filter(t => t.status === (taskStatus - 1));
                 }
-
 
                 $('.cards-container').html(' ');
                 for (task of filteredTasks) {

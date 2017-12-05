@@ -158,6 +158,16 @@
       "password": "MTIzNDU2",
       "phone": "",
       "id": 10
+    },
+    {
+      "firstName": "Ivan",
+      "lastName": "Angelov",
+      "username": "ivan",
+      "email": "inferno16@mail.bg",
+      "password": "MTIzNDU2",
+      "phone": "",
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
+      "id": 11
     }
   ]
 }
