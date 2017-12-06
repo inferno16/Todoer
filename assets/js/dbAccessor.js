@@ -9,6 +9,13 @@ var dbAccessor = (function () {
             contentType: 'application/json'
         });
     }
+    
+    function getTasksByUser(id) {
+        return $.ajax({
+            url: `${tasksUrl}?isDeleted=false&userId=${id}`,
+            contentType: 'application/json'
+        });
+    }
 
     function editTask(data) {
         return $.ajax({
@@ -81,6 +88,7 @@ var dbAccessor = (function () {
 
     return {
         getTasks: getTasks,
+        getTasksByUser: getTasksByUser,
         editTask: editTask,
         removeTask: removeTask,
         changeTaskStatus: changeTaskStatus,

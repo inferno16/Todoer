@@ -23,6 +23,11 @@ a, a:hover {
 .custom-navbar {
     background-color:#5090B2;
     border-radius: 0;
+    border: 0;
+}
+
+.custom-navbar #navbar-collapse {
+    border: 0;
 }
 
 .custom-navbar #navbar-collapse a {
@@ -41,6 +46,7 @@ a, a:hover {
     background-color:#5090B2;
     border-top: 1px solid gray;
     margin-top: -20px;
+    border-top: 1px solid #7db6d6;
     min-height: 100vh;
 }
 

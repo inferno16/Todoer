@@ -50,7 +50,7 @@ function createCircle(container, settings) {
     step: function(state, circle) {
         circle.path.setAttribute('stroke', state.color);
         circle.path.setAttribute('stroke-width', state.width);
-        circle.setText(Math.round(circleSettings.to * 100));
+        circle.setText(Math.round(settings.to * 100));
 
     }
     });
@@ -60,20 +60,41 @@ function createCircle(container, settings) {
     bar.animate(1.0);  // Number from 0.0 to 1.0
 }
 
-let barSettings = {
-    to: 0.7
+function initObjectsFromData(bar, circle, data) {
+    $.each(data, function(key, value){
+        circle[value.status].to += 0.01;
+    });
+    bar[0].to = circle[0].to * 100 / data.length;
+    bar[1].to = circle[1].to * 100 / data.length;
+    bar[2].to = circle[2].to * 100 / data.length;
 }
-createBar("#all-completed-tasks", { to: 0.7});
-createBar("#all-not-completed-tasks", {to: 0.2});
-createBar("#all-not-started-tasks", {to: 0.1});
 
+function initializeStatistics() {
+    var bar = [{to:0}, {to:0}, {to:0}];
+    var circle = [{to:0}, {to:0}, {to:0}];
+    
+    if(sessionStorage.length > 0 && sessionStorage.id != undefined) {
+        dbAccessor.getTasksByUser(sessionStorage.id).done(function(data){
+            initObjectsFromData(bar, circle, data);
+            
+            createBar("#all-completed-tasks", bar[2]);
+            createBar("#all-not-completed-tasks", bar[1]);
+            createBar("#all-not-started-tasks", bar[0]);
 
-let circleSettings = {
-    to: 0.1,
-    fromColor:"",
-    toColor:""
-};
-createCircle("#current-completed-tasks", circleSettings);
-circleSettings.to = 0.3;
-createCircle("#current-not-completed-tasks", circleSettings);
-createCircle("#current-not-started-tasks", circleSettings);
+            createCircle("#current-completed-tasks", circle[2]);
+            createCircle("#current-not-completed-tasks", circle[1]);
+            createCircle("#current-not-started-tasks", circle[0]);
+        });
+    }
+    else {
+        createBar("#all-completed-tasks", bar[0]);
+        createBar("#all-not-completed-tasks", bar[1]);
+        createBar("#all-not-started-tasks", bar[2]);
+
+        createCircle("#current-completed-tasks", circle[0]);
+        createCircle("#current-not-completed-tasks", circle[1]);
+        createCircle("#current-not-started-tasks", circle[2]);
+    }
+}
+
+initializeStatistics();

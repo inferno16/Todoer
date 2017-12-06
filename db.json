@@ -9,7 +9,7 @@
       "points": 21,
       "status": 2,
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-      "userId": 3,
+      "userId": 1,
       "isDeleted": false
     },
     {
@@ -19,9 +19,9 @@
       "description": " Cleaning the thing 2 is very important",
       "completion": "For 10.11.2018",
       "points": 9,
-      "status": 0,
+      "status": 1,
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-      "userId": null,
+      "userId": 1,
       "isDeleted": false
     },
     {
@@ -31,34 +31,10 @@
       "description": "Cleaning the thing 2 is very important",
       "completion": "For 10.11.2018",
       "points": 8,
-      "status": 0,
+      "status": 1,
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-      "userId": null,
+      "userId": 1,
       "isDeleted": false
-    },
-    {
-      "id": 4,
-      "code": "Some",
-      "name": "Shi",
-      "description": "T",
-      "completion": "For today",
-      "points": 10,
-      "status": 0,
-      "userPhoto": null,
-      "userId": null,
-      "isDeleted": true
-    },
-    {
-      "code": "TS12",
-      "name": "Doo",
-      "description": " Bee doo doo",
-      "completion": "Doo",
-      "points": 15,
-      "status": 0,
-      "userId": 3,
-      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-      "isDeleted": true,
-      "id": 5
     },
     {
       "code": "22",
@@ -67,21 +43,45 @@
       "completion": "A",
       "points": 14,
       "status": 0,
-      "userId": 3,
+      "userId": 1,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
+      "isDeleted": false,
+      "id": 4
+    },
+    {
+      "code": "TS4",
+      "name": "Test",
+      "description": "Test",
+      "completion": "",
+      "points": 7,
+      "status": 2,
+      "userId": 1,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
+      "isDeleted": false,
+      "id": 5
+    },
+    {
+      "code": "TS5",
+      "name": "Testing",
+      "description": "Testing",
+      "completion": "",
+      "points": 7,
+      "status": 0,
+      "userId": 1,
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
       "isDeleted": false,
       "id": 6
     },
     {
-      "code": "12",
-      "name": "das1",
-      "description": "Dee",
-      "completion": "Sd",
-      "points": 8,
-      "status": 1,
-      "userId": null,
-      "userPhoto": null,
-      "isDeleted": true,
+      "code": "TS6",
+      "name": "Tst",
+      "description": "Tst",
+      "completion": "",
+      "points": 17,
+      "status": 2,
+      "userId": 1,
+      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
+      "isDeleted": false,
       "id": 7
     }
   ],
@@ -93,53 +93,8 @@
       "email": "ivan.angelov95@yahoo.com",
       "password": "MTIzNDU2",
       "phone": "",
-      "id": 3,
+      "id": 1,
       "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000"
-    },
-    {
-      "firstName": "Ivan",
-      "lastName": "Angelov",
-      "username": "inferno16",
-      "email": "inferno16@mail.bg",
-      "password": "MTIzNDU2",
-      "phone": "",
-      "id": 4
-    },
-    {
-      "firstName": "Ivan",
-      "lastName": "Angelov",
-      "username": "inferno116",
-      "email": "inferno16@mail.bg",
-      "password": "MTIzNDU2",
-      "phone": "",
-      "id": 5
-    },
-    {
-      "firstName": "Ivan",
-      "lastName": "Angelov",
-      "username": "inferno112",
-      "email": "inferno16@mail.bg",
-      "password": "MTIzNDU2",
-      "phone": "",
-      "id": 6
-    },
-    {
-      "firstName": "Ivan",
-      "lastName": "Angelov",
-      "username": "inf3rno16",
-      "email": "inferno16@mail.bg",
-      "password": "MTIzNDU2",
-      "phone": "",
-      "id": 7
-    },
-    {
-      "firstName": "Ivan",
-      "lastName": "Angelov",
-      "username": "61460111",
-      "email": "inferno16@mail.bg",
-      "password": "MTIzNDU2",
-      "phone": "",
-      "id": 8
     },
     {
       "firstName": "dido",
@@ -148,26 +103,7 @@
       "email": "dido@abv.bg",
       "password": "MTIzNDU2",
       "phone": "",
-      "id": 9
-    },
-    {
-      "firstName": "d",
-      "lastName": "d",
-      "username": "d",
-      "email": "d@abv.bg",
-      "password": "MTIzNDU2",
-      "phone": "",
-      "id": 10
-    },
-    {
-      "firstName": "Ivan",
-      "lastName": "Angelov",
-      "username": "ivan",
-      "email": "inferno16@mail.bg",
-      "password": "MTIzNDU2",
-      "phone": "",
-      "userPhoto": "https://png.icons8.com/account/ultraviolet/25/000000",
-      "id": 11
+      "id": 2
     }
   ]
 }
